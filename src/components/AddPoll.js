@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { handleAddPoll } from '../actions/polls';
 
 //UI changes depending on state so making this an uncontrolled component which we normally wouldnt do.
 //so state needs to live inside component state. ie submit button disabled until input fields filled in.
@@ -25,7 +27,7 @@ class AddPoll extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log('Add poll: ', this.state)
+        this.props.dispatch(handleAddPoll(this.state))  //this.state is poll which action creator takes in
     }
 
     render() {
@@ -93,4 +95,5 @@ class AddPoll extends Component {
     }
 }
 
-export default AddPoll;
+//dont need mstp b/c not accessing store. just using connect to dispatch.
+export default connect()(AddPoll);
