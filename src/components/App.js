@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared';
+import Dashboard from './Dashboard';
+import LoadingBar from 'react-redux-loading';
+import Leaderboard from './Leaderboard';
+import AddPoll from './AddPoll';
 
 class App extends Component {
   //when component mounts want to invoke action creator (handleInitialData)
@@ -10,12 +14,21 @@ class App extends Component {
 
   render() {
     return (
+      //if load dashboard before data returns then will get errors so use ternary.
       <div>
-        Starter Code.
-      </div>
+        <LoadingBar />
+        {this.props.loading === true ? null : <AddPoll /> }  
+      </div>  
     )
   }
 }
 
-export default connect()(App)
+function mapStateToProps ({ authedUser }) {
+  return {
+    loading: authedUser === null  //if authedUser is null app is still loading true
+  }
+}
+
+
+export default connect(mapStateToProps)(App)
 //export invocation of connect which gives back a function which we invoke passing component
