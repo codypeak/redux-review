@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getPercentage } from '../utils/helpers';
+import { handleAddAnswer } from '../actions/answers';
 
 const getVoteKeys = () => ['aVotes', 'bVotes', 'cVotes', 'dVotes']
 
@@ -8,7 +9,11 @@ class Poll extends Component {
     handleAnswer = (answer) => {
         const { poll, authedUser }= this.props
         this.answered = true
-        console.log('Add Answer: ', answer)
+        this.props.dispatch(handleAddAnswer({
+            authedUser,
+            answer,
+            id: poll.id,
+        }))
     }
 
     render() {
@@ -35,6 +40,7 @@ class Poll extends Component {
                         const count = poll[key[0] + 'Votes'].length
                         return (
                             <li 
+                                key={key}
                                 onClick={() => {
                                     if (vote === null && !this.answered) {//can only vote if havent yet, so if vote null& not answered yet b/c few microsecond delay.
                                         this.handleAnswer(key[0])

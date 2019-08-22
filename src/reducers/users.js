@@ -1,5 +1,6 @@
 import { RECEIVE_USERS } from '../actions/users';
 import { ADD_POLL } from '../actions/polls';
+import { ADD_ANSWER } from '../actions/answers';
 
 export default function users (state={}, action) {
     switch (action.type) {
@@ -17,6 +18,15 @@ export default function users (state={}, action) {
                 [author]: {  //except for author, which is now prior author was with new poll concatenated to their poll property.
                     ...state[author],
                     polls: state[author].polls.concat([id])
+                }
+            }
+        case ADD_ANSWER: 
+            const user = state[action.authedUser]
+            return {
+                ...state,
+                [action.authedUser]: {
+                    ...user,
+                    answers: user.answers.concat([action.id])
                 }
             }
         default:
