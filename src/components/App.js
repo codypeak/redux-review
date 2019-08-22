@@ -5,6 +5,7 @@ import Dashboard from './Dashboard';
 import LoadingBar from 'react-redux-loading';
 import Leaderboard from './Leaderboard';
 import AddPoll from './AddPoll';
+import Poll from './Poll';
 
 class App extends Component {
   //when component mounts want to invoke action creator (handleInitialData)
@@ -17,7 +18,7 @@ class App extends Component {
       //if load dashboard before data returns then will get errors so use ternary.
       <div>
         <LoadingBar />
-        {this.props.loading === true ? null : <AddPoll /> }  
+        {this.props.loading === true ? null : <Poll match={{params: {id: 'loxhs1bqm25b708cmbf3g'}}} /> }  
       </div>  
     )
   }
