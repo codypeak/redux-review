@@ -18,7 +18,7 @@ class App extends Component {
       //if load dashboard before data returns then will get errors so use ternary.
       <div>
         <LoadingBar />
-        {this.props.loading === true ? null : <Poll match={{params: {id: 'loxhs1bqm25b708cmbf3g'}}} /> }  
+        {this.props.loading === true ? null : <Poll match={{params: {id: 'xj352vofupe1dqz9emx13r'}}} /> }  
       </div>  
     )
   }
